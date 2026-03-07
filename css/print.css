@@ -1,0 +1,112 @@
+/* css/print.css */
+/* Importamos los estilos base para reutilizar estructura,
+   pero la versión imprimible se consigue OVERRIDING con CSS */
+@import url("./base.css");
+
+/* ===== Versión imprimible (se aplica en pantalla y al imprimir) ===== */
+:root{
+  --bg: #ffffff;
+  --card: transparent;
+  --border: transparent;
+  --text: #000000;
+  --muted: #000000;
+  --accent: #000000;
+}
+
+body{
+  background: #fff;
+  color: #000;
+  font-family: Georgia, "Times New Roman", serif; /* tipografía distinta */
+  line-height: 1.45;
+}
+
+/* Quitamos “marcos” y fondos */
+.wrapper{
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+/* La estructura pasa a 1 columna para impresión */
+.layout{ display: block; }
+
+/* No menús: cabecera sin menú vertical + sin menú lateral */
+.toplinks{ display: none; } /* menú cabecera */
+.aside{ display: none; }    /* menú auxiliar */
+
+/* Sin botones flotantes de redes */
+.floating-actions{ display: none; }
+
+/* Cabecera: recolocamos el logo (otra posición) */
+.header{
+  border: 0;
+  border-radius: 0;
+  padding: 0 0 12px;
+  margin: 0 0 12px;
+  justify-content: center;
+}
+
+.brand{
+  flex-direction: column;  /* logo arriba y texto debajo */
+  align-items: center;
+  text-align: center;
+}
+
+.brand img{
+  width: 64px;
+  height: 64px;
+  border: 0;
+  border-radius: 0;
+}
+
+/* Zona principal limpia */
+.main{
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+}
+
+.news-meta{
+  grid-template-columns: 1fr; /* metadatos debajo */
+}
+
+/* Metadatos: sin caja “card” */
+.meta-box{
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  background: transparent;
+  margin-top: 10px;
+}
+
+/* Pie: más pequeño y con tipografía “de sistema” */
+.footer{
+  border: 0;
+  border-radius: 0;
+  padding: 14px 0 0;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10px;
+}
+
+.footer .links{ display: none; } /* enlaces del pie fuera */
+.footer .copy{
+  margin: 0;
+  text-align: center;
+}
+
+/* Imágenes en blanco y negro */
+figure, .card{ border: 0; border-radius: 0; background: transparent; }
+
+figure img{
+  filter: grayscale(100%);
+  height: auto;
+}
+
+/* Ajustes extra cuando realmente imprimes (Ctrl+P) */
+@media print{
+  @page { margin: 16mm; }
+  a{ text-decoration: none; color: #000; }
+}

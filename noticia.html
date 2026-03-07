@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Iznalloz · Detalle de noticia</title>
+  <link rel="stylesheet" href="css/base.css" />
+</head>
+<body>
+
+  <!-- Botones flotantes (siempre visibles) -->
+  <nav class="floating-actions" aria-label="Redes sociales e imprimir">
+    <a class="fab-ig" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+    <a class="fab-x"  href="https://x.com/" target="_blank" rel="noopener" aria-label="Twitter / X">X</a>
+    <a class="fab-tt" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+
+    <!-- Importante: imprime -> noticia_imprimir.html -->
+    <a class="fab-pr" href="noticia_imprimir.html" aria-label="Versión para imprimir">⎙</a>
+  </nav>
+
+  <div class="wrapper">
+    <div class="layout">
+
+      <!-- CABECERA (igual que portada) -->
+      <header class="header">
+        <div class="brand">
+          <img src="img/logo.png" alt="Logo del Ayuntamiento de Iznalloz" />
+          <div>
+            <h1>Iznalloz · Incidencias y Noticias</h1>
+            <p>Portal municipal de avisos, obras, eventos y incidencias</p>
+          </div>
+        </div>
+
+        <aside class="toplinks" aria-label="Enlaces relevantes">
+          <ul>
+            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a></li>
+            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Sede electrónica</a></li>
+            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Teléfonos de interés</a></li>
+          </ul>
+        </aside>
+      </header>
+
+      <!-- MENÚ LATERAL (igual que portada) -->
+      <aside class="aside">
+        <h2>Acciones</h2>
+        <nav class="side-menu" aria-label="Menú lateral">
+          <a href="portada.html">Volver a portada</a>
+          <a href="#">Crear incidencia</a>
+          <a href="#">Consultar incidencias</a>
+        </nav>
+      </aside>
+
+      <!-- ZONA PRINCIPAL: DETALLE DE NOTICIA -->
+      <main class="main">
+        <article class="news-detail">
+          <h2>Corte temporal de agua en zona centro (mañana)</h2>
+
+          <div class="news-meta">
+            <div>
+              <p class="news-lead">
+                Por tareas de mantenimiento en la red, se realizará un corte programado del suministro
+                en varias calles del centro urbano.
+              </p>
+
+              <p>
+                El corte está previsto entre las <strong>09:00</strong> y las <strong>13:00</strong>. Rogamos a los vecinos
+                que tomen las medidas oportunas. Si la intervención finaliza antes de lo previsto, el
+                suministro se restablecerá automáticamente.
+              </p>
+
+              <p>
+                Disculpen las molestias. Para incidencias urgentes durante la actuación, puede contactar
+                con el servicio municipal de mantenimiento.
+              </p>
+
+              <!-- Fotos (después de la descripción) con pie -->
+              <section class="gallery" aria-label="Fotografías">
+                <figure>
+                  <img src="img/n1.jpeg" alt="Operarios realizando mantenimiento en la red de agua" />
+                  <figcaption>Operarios revisando una arqueta de la red municipal.</figcaption>
+                </figure>
+
+                <figure>
+                  <img src="img/n2.jpg" alt="Zona centro de Iznalloz" />
+                  <figcaption>Área afectada: calles del entorno del centro urbano.</figcaption>
+                </figure>
+              </section>
+            </div>
+
+            <!-- Metadatos “tipo ficha” -->
+            <aside class="meta-box" aria-label="Datos de la noticia">
+              <h3>Ficha</h3>
+
+              <dl>
+                <div>
+                  <dt>Fecha de publicación</dt>
+                  <dd><time datetime="2026-03-06">06/03/2026</time></dd>
+                </div>
+
+                <div>
+                  <dt>Tipo</dt>
+                  <dd>Incidencias</dd>
+                </div>
+
+                <div>
+                  <dt>Concejalía</dt>
+                  <dd>Servicios Municipales</dd>
+                </div>
+
+                <div>
+                  <dt>Responsables</dt>
+                  <dd>
+                    <ul class="chips" aria-label="Personas responsables">
+                      <li class="chip">Mantenimiento</li>
+                      <li class="chip">Aguas</li>
+                      <li class="chip">Atención ciudadana</li>
+                    </ul>
+                  </dd>
+                </div>
+              </dl>
+
+              <ul class="chips" aria-label="Etiquetas">
+                <li class="chip">Corte programado</li>
+                <li class="chip">Zona centro</li>
+                <li class="chip">09:00–13:00</li>
+              </ul>
+            </aside>
+          </div>
+        </article>
+      </main>
+
+      <!-- PIE (igual que portada) -->
+      <footer class="footer">
+        <div class="links">
+          <a href="#">Identificación</a>
+          <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web Ayuntamiento</a>
+          <a href="#">Aviso legal</a>
+        </div>
+        <div class="copy">© Ayuntamiento de Iznalloz</div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>
