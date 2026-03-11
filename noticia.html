@@ -1,145 +1,147 @@
-<!doctype html>
-<html lang="es">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Iznalloz · Detalle de noticia</title>
-  <link rel="stylesheet" href="css/base.css" />
-</head>
-<body>
+<!DOCTYPE html>
 
-  <!-- Botones flotantes (siempre visibles) -->
-  <nav class="floating-actions" aria-label="Redes sociales e imprimir">
-    <a class="fab-ig" href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-    <a class="fab-x"  href="https://x.com/" target="_blank" rel="noopener" aria-label="Twitter / X">X</a>
-    <a class="fab-tt" href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">TT</a>
+<html lang="es">  
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Iznalloz - Incidencias y Noticias</title>
+        <link rel="stylesheet" href="css/base.css" />
+    </head>
 
-    <!-- Importante: imprime -> noticia_imprimir.html -->
-    <a class="fab-pr" href="noticia_imprimir.html" aria-label="Versión para imprimir">⎙</a>
-  </nav>
+    <body>  
+        <header>
+            <img class="cabecera_logo" src="img/logo.png" alt="Escudo Ayuntamiento">
 
-  <div class="wrapper">
-    <div class="layout">
+            <h1 class="cabecera_titulo"> Ayuntamiento de Iznalloz · Noticias e Incidencias </h1>
 
-      <!-- CABECERA (igual que portada) -->
-      <header class="header">
-        <div class="brand">
-          <img src="img/logo.png" alt="Logo del Ayuntamiento de Iznalloz" />
-          <div>
-            <h1>Iznalloz · Incidencias y Noticias</h1>
-            <p>Portal municipal de avisos, obras, eventos y incidencias</p>
-          </div>
-        </div>
+            <nav class="cabecera_enlaces">
+                <ul>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a>
+                    </li>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Sede Electrónica</a>
+                    </li>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Teléfonos de Interés</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
 
-        <aside class="toplinks" aria-label="Enlaces relevantes">
-          <ul>
-            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a></li>
-            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Sede electrónica</a></li>
-            <li><a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Teléfonos de interés</a></li>
-          </ul>
-        </aside>
-      </header>
-
-      <!-- MENÚ LATERAL (igual que portada) -->
-      <aside class="aside">
-        <h2>Acciones</h2>
-        <nav class="side-menu" aria-label="Menú lateral">
-          <a href="portada.html">Volver a portada</a>
-          <a href="#">Crear incidencia</a>
-          <a href="#">Consultar incidencias</a>
-        </nav>
-      </aside>
-
-      <!-- ZONA PRINCIPAL: DETALLE DE NOTICIA -->
-      <main class="main">
-        <article class="news-detail">
-          <h2>Corte temporal de agua en zona centro (mañana)</h2>
-
-          <div class="news-meta">
-            <div>
-              <p class="news-lead">
-                Por tareas de mantenimiento en la red, se realizará un corte programado del suministro
-                en varias calles del centro urbano.
-              </p>
-
-              <p>
-                El corte está previsto entre las <strong>09:00</strong> y las <strong>13:00</strong>. Rogamos a los vecinos
-                que tomen las medidas oportunas. Si la intervención finaliza antes de lo previsto, el
-                suministro se restablecerá automáticamente.
-              </p>
-
-              <p>
-                Disculpen las molestias. Para incidencias urgentes durante la actuación, puede contactar
-                con el servicio municipal de mantenimiento.
-              </p>
-
-              <!-- Fotos (después de la descripción) con pie -->
-              <section class="gallery" aria-label="Fotografías">
-                <figure>
-                  <img src="img/n1.jpeg" alt="Operarios realizando mantenimiento en la red de agua" />
-                  <figcaption>Operarios revisando una arqueta de la red municipal.</figcaption>
-                </figure>
-
-                <figure>
-                  <img src="img/n2.jpg" alt="Zona centro de Iznalloz" />
-                  <figcaption>Área afectada: calles del entorno del centro urbano.</figcaption>
-                </figure>
-              </section>
-            </div>
-
-            <!-- Metadatos “tipo ficha” -->
-            <aside class="meta-box" aria-label="Datos de la noticia">
-              <h3>Ficha</h3>
-
-              <dl>
-                <div>
-                  <dt>Fecha de publicación</dt>
-                  <dd><time datetime="2026-03-06">06/03/2026</time></dd>
-                </div>
-
-                <div>
-                  <dt>Tipo</dt>
-                  <dd>Incidencias</dd>
-                </div>
-
-                <div>
-                  <dt>Concejalía</dt>
-                  <dd>Servicios Municipales</dd>
-                </div>
-
-                <div>
-                  <dt>Responsables</dt>
-                  <dd>
-                    <ul class="chips" aria-label="Personas responsables">
-                      <li class="chip">Mantenimiento</li>
-                      <li class="chip">Aguas</li>
-                      <li class="chip">Atención ciudadana</li>
+        <aside class="menu_lateral"> 
+                <nav class="nav_menu_lateral">
+                    <ul class="lista_menu_lateral">
+                        <li>
+                            <a href="#">Nueva incidencia</a>
+                        </li>
+                        <li>
+                            <a href="#">Consultar incidencia</a>
+                        </li>
+                        <li>
+                            <a href="#">Avisos</a>
+                        </li>
+                        <li>
+                            <a href="#">Contacto</a>
+                        </li>
                     </ul>
-                  </dd>
-                </div>
-              </dl>
-
-              <ul class="chips" aria-label="Etiquetas">
-                <li class="chip">Corte programado</li>
-                <li class="chip">Zona centro</li>
-                <li class="chip">09:00–13:00</li>
-              </ul>
+                </nav>
             </aside>
-          </div>
-        </article>
-      </main>
 
-      <!-- PIE (igual que portada) -->
-      <footer class="footer">
-        <div class="links">
-          <a href="#">Identificación</a>
-          <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web Ayuntamiento</a>
-          <a href="#">Aviso legal</a>
-        </div>
-        <div class="copy">© Ayuntamiento de Iznalloz</div>
-      </footer>
+            <main class="principal">
+                <article class="noticia_detalle">
 
-    </div>
-  </div>
-</body>
+                    <header class="noticia_cabecera">
+                        <h2 class="noticia_titulo">Corte temporal de agua en zona centro (mañana)</h2>
+
+                        <nav class="noticia_redes" aria-label="Redes sociales y acciones">
+                            <ul class="lista_redes">
+                                <li>
+                                    <a href="#">
+                                        <img src="img/instagram.png" alt="Instagram">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="img/twitter.png" alt="Twitter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="img/tiktok.png" alt="TikTok">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="noticia_imprimir.html">
+                                        <img src="img/imprimir.png" alt="Imprimir noticia">
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </header>
+                    
+
+                    <section class="noticia_info">
+                        <p><strong>Fecha:</strong> 11/03/2026</p>
+                        <p><strong>Tipo:</strong> Incidencia</p>
+                        <p><strong>Concejalía:</strong> Urbanismo y Mantenimiento</p>
+                        <p><strong>Responsables:</strong> Ayuntamiento de Iznalloz y Servicios Técnicos Municipales</p>
+                    </section>
+
+                    <section class="noticia_texto">
+                        <p>
+                            El Ayuntamiento de Iznalloz ha informado de un corte temporal en el suministro de agua potable
+                            que afecta a varias calles del municipio debido a una avería detectada en la red general de abastecimiento.
+                        </p>
+                        <p>
+                            La incidencia se localiza en una tubería principal que presenta una fuga y que requiere una intervención urgente
+                            para evitar daños mayores y restablecer el servicio en condiciones de seguridad.
+                        </p>
+                        <p>
+                            Los operarios ya están trabajando en la zona afectada para sustituir el tramo dañado y comprobar el estado del 
+                            resto de la instalación. Mientras duren las labores de reparación, los vecinos de las calles afectadas podrán 
+                            experimentar falta de suministro o bajadas de presión.
+                        </p>
+                        <p>
+                            Desde el Ayuntamiento se recomienda hacer un uso responsable del agua almacenada hasta que el servicio quede 
+                            completamente restablecido. También se ruega a los vecinos que eviten abrir grifos de forma continuada mientras 
+                            dure la incidencia, ya que el suministro se recuperará progresivamente una vez finalicen los trabajos.
+                        </p>
+                    </section>
+
+                    <section class="noticia_imagenes">
+                        <div class="bloque_imagen">
+                            <img src="img/n1.jpeg" alt="Imagen de la noticia">
+                            <p class="pie_imagen">Cartel oficial anuncio corte de agua.</p>
+                        </div>
+
+                        <div class="bloque_imagen">
+                            <img src="img/n2.jpg" alt="Segunda imagen de la noticia">
+                            <p class="pie_imagen">Zona afectada por la incidencia en el suministro 
+                                de agua en el municipio.</p>
+                        </div>
+                    </section>
+                </article>     
+            </main>
+
+            <footer class="pie">
+                <section class="pie_contenido">
+                    <nav class="pie_enlaces">
+                        <ul class="pie_lista_enlaces">
+                            <li>
+                                <a href="#">Información Básica</a>
+                            </li>
+                            <li>
+                                <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a>
+                            </li>
+                            <li>
+                                <a href="#">Aviso Legal</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <p class="pie_copy">&copy; 2026 Incidencias Iznalloz</p>
+                </section>
+            </footer>
+    </body>
 </html>
