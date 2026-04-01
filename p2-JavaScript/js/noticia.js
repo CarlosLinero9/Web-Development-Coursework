@@ -29,6 +29,7 @@ let campoNombre = document.getElementById("nombre");
 let campoEmail = document.getElementById("email");
 let campoTexto = document.getElementById("texto");
 let botonEnviar = document.getElementById("enviar");
+let botonCancelar = document.getElementById("cancelar");
 
 let modalError = document.getElementById("modal-error");
 let modalTitulo = document.getElementById("modal-titulo");
@@ -65,6 +66,7 @@ document.addEventListener("keydown", function (e) {
   if (e.key === "Escape") {
     panel.classList.remove("abierto");
     ocultarModal();
+    formulario.style.display = "none";
   }
 });
 
@@ -103,6 +105,13 @@ pintar();
 
 botonNuevo.addEventListener("click", function () {
   formulario.style.display = "block";
+});
+
+botonCancelar.addEventListener("click", function () {
+  formulario.style.display = "none";
+  campoNombre.value = "";
+  campoEmail.value = "";
+  campoTexto.value = "";
 });
 
 campoTexto.addEventListener("input", function () {

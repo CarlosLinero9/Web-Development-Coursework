@@ -437,9 +437,14 @@ img {
     min-height: 100px;
 }
 
-#enviar {
-    background: #cfcfcf;
-    color: #222222;
+.botones-formulario {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+#enviar,
+#cancelar {
     border: 1px solid #909090;
     padding: 8px 14px;
     border-radius: 6px;
@@ -447,8 +452,22 @@ img {
     font-weight: 600;
 }
 
+#enviar {
+    background: #cfcfcf;
+    color: #222222;
+}
+
 #enviar:hover {
     background: #bdbdbd;
+}
+
+#cancelar {
+    background: #ececec;
+    color: #222222;
+}
+
+#cancelar:hover {
+    background: #d5d5d5;
 }
 
 /* MODAL DE ERROR */
