@@ -1,0 +1,303 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background-color: #e6e6e6;
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        "cabecera cabecera"
+        "lateral principal"
+        "pie pie";
+
+    gap: 12px;
+}
+
+body > header {
+    grid-area: cabecera;
+    padding: 12px;
+    min-height: 180px;
+    position: relative;
+    overflow: hidden;
+
+    background-image: url("../img/iznalloz.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+body > header::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: rgba(255, 255, 255, 0.45);
+}
+
+body > header > * {
+    position: relative;
+    z-index: 1;
+}
+
+body > aside {
+    grid-area: lateral;
+    padding: 12px;
+    background-color: #ececec;
+}
+
+body > main {
+    grid-area: principal;
+    padding: 16px;
+    background-color: white;
+    border-radius: 8px;
+}
+
+body > footer {
+    grid-area: pie;
+    padding: 12px;
+    background-color: #d9d9d9;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* CABECERA */
+.cabecera_logo {
+    width: 90px;
+    height: auto;
+}
+
+.cabecera_titulo {
+    margin: 0;
+    background-color: rgba(255, 255, 255, 0.45);
+    font-size: 1.8rem;
+    flex: 1;
+}
+
+.cabecera_enlaces {
+    margin-left: auto;
+}
+
+.cabecera_enlaces ul {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.cabecera_enlaces a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    padding: 10px 14px;
+    background-color: rgba(199, 199, 199, 0.9);
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 1.05rem;
+}
+
+.cabecera_enlaces a:hover {
+    background-color: rgba(181, 181, 181, 0.95);
+}
+
+/* MENÚ LATERAL */
+.menu_lateral {
+    display: flex;
+    align-items: flex-start;
+}
+
+.lista_menu_lateral {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.lista_menu_lateral a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    background-color: #cfcfcf;
+    padding: 10px 12px;
+    border-radius: 6px;
+}
+
+.lista_menu_lateral a:hover {
+    background-color: #bdbdbd;
+}
+
+/* PORTADA */
+.section_noticias {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.noticia {
+    background-color: #dddddd;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.noticia a {
+    display: block;
+    text-decoration: none;
+    color: black;
+}
+
+.noticia img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+}
+
+.noticia h2 {
+    margin: 0;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+.noticia a:hover h2 {
+    text-decoration: underline;
+}
+
+/* PIE */
+.pie_contenido {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+}
+
+.pie_lista_enlaces {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.pie_enlaces a {
+    text-decoration: none;
+    color: black;
+}
+
+.pie_enlaces a:hover {
+    text-decoration: underline;
+}
+
+.pie_copy {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+/* NOTICIA.HTML */
+.noticia_detalle {
+    background-color: #dddddd;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.noticia_cabecera {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.noticia_titulo {
+    margin: 0;
+    font-size: 2rem;
+    flex: 1;
+}
+
+.lista_redes {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.noticia_redes a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 6px;
+    background-color: #ececec;
+    border: 1px solid #bdbdbd;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.noticia_redes a:hover {
+    background-color: #dcdcdc;
+}
+
+.noticia_redes img {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.noticia_info {
+    margin-bottom: 16px;
+    padding: 12px;
+    background-color: #ececec;
+    border-radius: 6px;
+}
+
+.noticia_texto {
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+.noticia_texto p {
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+
+.noticia_imagenes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+}
+
+.bloque_imagen {
+    background-color: #ececec;
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.bloque_imagen img {
+    width: 100%;
+    height: 220px;
+    object-fit: contain;
+    margin-bottom: 8px;
+}
+
+.pie_imagen {
+    margin: 0;
+    font-size: 0.95rem;
+}
