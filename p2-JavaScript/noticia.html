@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+
+<html lang="es">  
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Iznalloz - Incidencias y Noticias</title>
+        <link rel="stylesheet" href="css/base.css" />
+    </head>
+
+    <body>  
+        <header>
+            <img class="cabecera_logo" src="img/logo.png" alt="Escudo Ayuntamiento">
+
+            <h1 class="cabecera_titulo"> Ayuntamiento de Iznalloz · Noticias e Incidencias </h1>
+
+            <nav class="cabecera_enlaces">
+                <ul>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a>
+                    </li>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Sede Electrónica</a>
+                    </li>
+                    <li>
+                        <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Teléfonos de Interés</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <aside class="menu_lateral"> 
+                <nav class="nav_menu_lateral">
+                    <ul class="lista_menu_lateral">
+                        <li>
+                            <a href="#">Nueva incidencia</a>
+                        </li>
+                        <li>
+                            <a href="#">Consultar incidencia</a>
+                        </li>
+                        <li>
+                            <a href="#">Avisos</a>
+                        </li>
+                        <li>
+                            <a href="#">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <main class="principal">
+                <article class="noticia_detalle">
+
+                    <header class="noticia_cabecera">
+                        <h2 class="noticia_titulo">Corte temporal de agua en zona centro (mañana)</h2>
+
+                        <nav class="noticia_redes" aria-label="Redes sociales y acciones">
+                            <ul class="lista_redes">
+                                <li>
+                                    <a href="#">
+                                        <img src="img/instagram.png" alt="Instagram">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="img/twitter.png" alt="Twitter">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <img src="img/tiktok.png" alt="TikTok">
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="noticia_imprimir.html">
+                                        <img src="img/imprimir.png" alt="Imprimir noticia">
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </header>
+                    
+
+                    <section class="noticia_info">
+                        <p><strong>Fecha:</strong> 11/03/2026</p>
+                        <p><strong>Tipo:</strong> Incidencia</p>
+                        <p><strong>Concejalía:</strong> Urbanismo y Mantenimiento</p>
+                        <p><strong>Responsables:</strong> Ayuntamiento de Iznalloz y Servicios Técnicos Municipales</p>
+                    </section>
+
+                    <section class="noticia_texto">
+                        <p>
+                            El Ayuntamiento de Iznalloz ha informado de un corte temporal en el suministro de agua potable
+                            que afecta a varias calles del municipio debido a una avería detectada en la red general de abastecimiento.
+                        </p>
+                        <p>
+                            La incidencia se localiza en una tubería principal que presenta una fuga y que requiere una intervención urgente
+                            para evitar daños mayores y restablecer el servicio en condiciones de seguridad.
+                        </p>
+                        <p>
+                            Los operarios ya están trabajando en la zona afectada para sustituir el tramo dañado y comprobar el estado del 
+                            resto de la instalación. Mientras duren las labores de reparación, los vecinos de las calles afectadas podrán 
+                            experimentar falta de suministro o bajadas de presión.
+                        </p>
+                        <p>
+                            Desde el Ayuntamiento se recomienda hacer un uso responsable del agua almacenada hasta que el servicio quede 
+                            completamente restablecido. También se ruega a los vecinos que eviten abrir grifos de forma continuada mientras 
+                            dure la incidencia, ya que el suministro se recuperará progresivamente una vez finalicen los trabajos.
+                        </p>
+                    </section>
+
+                    <section class="noticia_imagenes">
+                        <div class="bloque_imagen">
+                            <img src="img/n1.jpeg" alt="Imagen de la noticia">
+                            <p class="pie_imagen">Cartel oficial anuncio corte de agua.</p>
+                        </div>
+
+                        <div class="bloque_imagen">
+                            <img src="img/n2.jpg" alt="Segunda imagen de la noticia">
+                            <p class="pie_imagen">Zona afectada por la incidencia en el suministro 
+                                de agua en el municipio.</p>
+                        </div>
+                    </section>
+                </article>     
+            </main>
+
+            <button id="trigger-comentarios" class="comentarios_trigger" type="button" aria-label="Abrir panel de comentarios"></button>
+
+            <aside id="panel-comentarios" class="panel_comentarios" aria-label="Panel de comentarios de la noticia">
+                <div class="panel_comentarios_cabecera">
+                    <div>
+                        <p class="panel_comentarios_etiqueta">Participación ciudadana</p>
+                        <h3 class="panel_comentarios_titulo">Comentarios (<span id="contador-comentarios">0</span>)</h3>
+                    </div>
+
+                    <button id="cerrar-panel" class="boton_icono" type="button" aria-label="Cerrar panel de comentarios">×</button>
+                </div>
+
+                <div class="panel_comentarios_acciones">
+                    <button id="mostrar-formulario" class="boton_primario" type="button">Nuevo comentario</button>
+                </div>
+
+                <section id="contenedor-formulario" class="formulario_comentario oculto" aria-label="Formulario para añadir comentario">
+                    <div class="formulario_comentario_cabecera">
+                        <h4>Alta de comentario</h4>
+                        <button id="cerrar-formulario" class="boton_icono" type="button" aria-label="Cerrar formulario de comentario">×</button>
+                    </div>
+
+                    <p id="mensaje-panel" class="mensaje_panel" aria-live="assertive"></p>
+
+                    <form id="form-comentario" novalidate>
+                        <label for="nombre-comentario">Nombre</label>
+                        <input id="nombre-comentario" name="nombre" type="text" maxlength="60">
+
+                        <label for="email-comentario">E-mail</label>
+                        <input id="email-comentario" name="email" type="email" maxlength="120">
+
+                        <label for="texto-comentario">Texto del comentario</label>
+                        <textarea id="texto-comentario" name="texto" rows="6" maxlength="500"></textarea>
+
+                        <div class="formulario_botones">
+                            <button class="boton_primario" type="submit">Enviar</button>
+                            <button id="cancelar-formulario" class="boton_secundario" type="button">Cancelar</button>
+                        </div>
+                    </form>
+                </section>
+
+                <section id="lista-comentarios" class="lista_comentarios" aria-label="Lista de comentarios"></section>
+            </aside>
+
+            <dialog id="dialogo-alerta" class="dialogo_alerta">
+                <form method="dialog" class="dialogo_alerta_contenido">
+                    <h3 id="dialogo-titulo">Aviso</h3>
+                    <p id="dialogo-mensaje"></p>
+                    <div class="dialogo_acciones">
+                        <button class="boton_primario" type="submit">Cerrar</button>
+                    </div>
+                </form>
+            </dialog>
+
+            <footer class="pie">
+                <section class="pie_contenido">
+                    <nav class="pie_enlaces">
+                        <ul class="pie_lista_enlaces">
+                            <li>
+                                <a href="#">Información Básica</a>
+                            </li>
+                            <li>
+                                <a href="https://www.iznalloz.es/" target="_blank" rel="noopener">Web del Ayuntamiento</a>
+                            </li>
+                            <li>
+                                <a href="#">Aviso Legal</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <p class="pie_copy">&copy; 2026 Incidencias Iznalloz</p>
+                </section>
+            </footer>
+
+            <script src="js/noticia.js"></script>
+    </body>
+</html>
