@@ -1,0 +1,4 @@
+CREATE DATABASE IF NOT EXISTS sibwdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'sibwuser'@'localhost' IDENTIFIED BY 'sibwpass';
+GRANT SELECT, INSERT, UPDATE, DELETE ON sibwdb.* TO 'sibwuser'@'localhost';
+FLUSH PRIVILEGES;

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{ site.title }}{% if page_title is defined and page_title %} · {{ page_title }}{% endif %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="assets/css/base.css" />
+        {% endblock %}
+    </head>
+    <body>
+        {% include 'partials/header.html.twig' %}
+
+        {% if print_view is not defined or not print_view %}
+            <aside class="menu_lateral">
+                <nav class="nav_menu_lateral">
+                    <ul class="lista_menu_lateral">
+                        {% for link in site.side_links %}
+                            <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                        {% endfor %}
+                    </ul>
+                </nav>
+            </aside>
+        {% endif %}
+
+        <main class="principal">
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'partials/footer.html.twig' %}
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

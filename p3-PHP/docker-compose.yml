@@ -1,0 +1,45 @@
+services:
+  web:
+    build: .
+    container_name: sibw_web
+    ports:
+      - "8080:80"
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: sibwdb
+      DB_USER: sibwuser
+      DB_PASSWORD: sibwpass
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: sibw_db
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpass
+      MYSQL_DATABASE: sibwdb
+      MYSQL_USER: sibwuser
+      MYSQL_PASSWORD: sibwpass
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: sibw_phpmyadmin
+    depends_on:
+      - db
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: rootpass
+    ports:
+      - "8081:80"
+
+volumes:
+  mysql_data:
