@@ -1,7 +1,7 @@
 FROM php:8.3-apache
 
 RUN apt-get update \
-    && apt-get install -y git unzip libzip-dev default-mysql-client \
+    && apt-get install -y git unzip libzip-dev libonig-dev default-mysql-client \
     && docker-php-ext-install mysqli mbstring \
     && a2enmod rewrite \
     && rm -rf /var/lib/apt/lists/*

@@ -2,19 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Database;
-use App\Repository\NewsRepository;
+['base_url' => $baseUrl] = require __DIR__ . '/../config/bootstrap.php';
 
-['twig' => $twig, 'config' => $config] = require __DIR__ . '/../config/bootstrap.php';
-
-$database = new Database($config['database']);
-$connection = $database->getConnection();
-$newsRepository = new NewsRepository($connection);
-
-$noticias = $newsRepository->getAllForPortada();
-$database->close();
-
-echo $twig->render('portada.html.twig', [
-    'page_title' => 'Portada',
-    'noticias' => $noticias,
-]);
+header('Location: ' . ($baseUrl !== '' ? $baseUrl : '') . '/', true, 302);
+exit;

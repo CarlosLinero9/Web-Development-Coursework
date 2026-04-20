@@ -150,3 +150,14 @@ Ahora:
 ## Nota
 
 Para que Twig funcione, necesitas ejecutar `composer install`.
+
+
+## URLs limpias y router frontal
+
+Esta versión incluye el ejercicio opcional de la práctica:
+
+- Rutas limpias: `/`, `/portada`, `/noticia/3`, `/noticia/3/imprimir`
+- Gestión centralizada en `public/index.php`
+- Reescritura de URLs con `public/.htaccess` y `mod_rewrite`
+
+Los ficheros `portada.php`, `noticia.php` y `noticia_imprimir.php` se mantienen solo como redirecciones de compatibilidad, pero las rutas reales se atienden desde `index.php`.

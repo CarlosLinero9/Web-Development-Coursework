@@ -16,9 +16,17 @@ $twig = new Environment($loader, [
     'strict_variables' => false,
 ]);
 
+$scriptName = $_SERVER['SCRIPT_NAME'] ?? '';
+$baseUrl = rtrim(str_replace('\\', '/', dirname($scriptName)), '/');
+if ($baseUrl === '/' || $baseUrl === '.') {
+    $baseUrl = '';
+}
+
 $twig->addGlobal('site', $config['site']);
+$twig->addGlobal('base_url', $baseUrl);
 
 return [
     'twig' => $twig,
     'config' => $config,
+    'base_url' => $baseUrl,
 ];

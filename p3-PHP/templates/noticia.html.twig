@@ -10,13 +10,13 @@
                     {% for social in site.social_links %}
                         <li>
                             <a href="{{ social.url }}" aria-label="{{ social.label }}">
-                                <img src="{{ social.icon }}" alt="{{ social.label }}" />
+                                <img src="{{ base_url }}/{{ social.icon }}" alt="{{ social.label }}" />
                             </a>
                         </li>
                     {% endfor %}
                     <li>
-                        <a href="noticia_imprimir.php?id={{ noticia.id }}" aria-label="Imprimir noticia">
-                            <img src="assets/img/imprimir.png" alt="Imprimir noticia" />
+                        <a href="{{ base_url }}/noticia/{{ noticia.id }}/imprimir" aria-label="Imprimir noticia">
+                            <img src="{{ base_url }}/assets/img/imprimir.png" alt="Imprimir noticia" />
                         </a>
                     </li>
                 </ul>
@@ -40,7 +40,7 @@
         <section class="noticia_imagenes">
             {% for imagen in imagenes %}
                 <div class="bloque_imagen">
-                    <img src="{{ imagen.ruta }}" alt="Imagen {{ loop.index }} de {{ noticia.titulo }}" />
+                    <img src="{{ base_url }}/{{ imagen.ruta }}" alt="Imagen {{ loop.index }} de {{ noticia.titulo }}" />
                     <p class="pie_imagen">{{ imagen.pie }}</p>
                 </div>
             {% endfor %}
@@ -62,7 +62,7 @@
 
         <button id="nuevo" type="button">Nuevo comentario</button>
 
-        <form id="formulario" method="post" action="noticia.php?id={{ noticia.id }}" {% if not open_form %}style="display:none;"{% endif %}>
+        <form id="formulario" method="post" action="{{ base_url }}/noticia/{{ noticia.id }}" {% if not open_form %}style="display:none;"{% endif %}>
             <input id="nombre" name="nombre" value="{{ form_data.nombre }}" placeholder="Nombre" maxlength="120" />
             <input id="email" name="email" value="{{ form_data.email }}" placeholder="Email" maxlength="180" />
             <textarea id="texto" name="texto" placeholder="Comentario" data-localidades='{{ localidades_json|e('html_attr') }}' maxlength="1200">{{ form_data.texto }}</textarea>
@@ -101,5 +101,5 @@
 {% endblock %}
 
 {% block scripts %}
-    <script src="assets/js/noticia.js"></script>
+    <script src="{{ base_url }}/assets/js/noticia.js"></script>
 {% endblock %}

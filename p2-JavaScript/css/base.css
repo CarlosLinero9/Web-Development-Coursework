@@ -99,7 +99,7 @@ img {
 
 .cabecera_enlaces ul {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 10px;
     flex-wrap: wrap;
     align-items: center;

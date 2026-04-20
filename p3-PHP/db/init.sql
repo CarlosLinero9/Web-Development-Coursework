@@ -1,3 +1,6 @@
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
+
 DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS imagenes;
 DROP TABLE IF EXISTS noticias;
