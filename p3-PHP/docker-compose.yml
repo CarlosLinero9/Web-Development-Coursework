@@ -36,8 +36,8 @@ services:
     environment:
       PMA_HOST: db
       PMA_PORT: 3306
-      PMA_USER: root
-      PMA_PASSWORD: rootpass
+      PMA_USER: sibwuser
+      PMA_PASSWORD: sibwpass
     ports:
       - "8081:80"
 

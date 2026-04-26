@@ -61,9 +61,10 @@ docker compose up --build
 ### Credenciales por defecto
 
 - **BD**: `sibwdb`
-- **Usuario app**: `sibwuser`
-- **Password app**: `sibwpass`
-- **Root MySQL**: `rootpass`
+- **Usuario de la aplicación y phpMyAdmin**: `sibwuser`
+- **Contraseña**: `sibwpass`
+
+> La contraseña `rootpass` aparece solo porque la imagen oficial de MySQL exige definir una contraseña de administración interna. La aplicación web no se conecta como `root`; usa `sibwuser`, configurado en `docker-compose.yml` y `config/config.php`.
 
 ## Opción alternativa: XAMPP / LAMPP
 
@@ -116,7 +117,8 @@ Las vistas Twig solo muestran datos.
 - Validación de email con `filter_var`.
 - Sanitización básica con `trim`, `strip_tags` y normalización de espacios.
 - Consultas preparadas para evitar inyección SQL.
-- Usuario de conexión distinto de root.
+- Usuario de conexión distinto de `root`: la aplicación usa `sibwuser`.
+- phpMyAdmin también entra por defecto con `sibwuser`, no con `root`.
 - Configuración centralizada en `config/config.php`.
 - Desactivación de funciones peligrosas en `docker/php.ini`.
 
