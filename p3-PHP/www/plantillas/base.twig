@@ -5,11 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{{ site.title }}{% if page_title is defined and page_title %} · {{ page_title }}{% endif %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href="{{ base_url }}/assets/css/base.css" />
+            <link rel="stylesheet" href="css/base.css" />
         {% endblock %}
     </head>
     <body>
-        {% include 'partials/header.html.twig' %}
+        {% include 'partials/header.twig' %}
 
         {% if print_view is not defined or not print_view %}
             <aside class="menu_lateral">
@@ -27,7 +27,7 @@
             {% block content %}{% endblock %}
         </main>
 
-        {% include 'partials/footer.html.twig' %}
+        {% include 'partials/footer.twig' %}
 
         {% block scripts %}{% endblock %}
     </body>

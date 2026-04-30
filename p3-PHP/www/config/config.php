@@ -1,14 +1,14 @@
 <?php
 
-declare(strict_types=1);
-
 return [
     'database' => [
-        'host' => getenv('DB_HOST') ?: 'db',
+        // En el docker de la asignatura normalmente el host es lamp-mysql8.
+        // En el docker-compose incluido se sobreescribe con DB_HOST=db.
+        'host' => getenv('DB_HOST') ?: 'lamp-mysql8',
         'port' => (int) (getenv('DB_PORT') ?: 3306),
         'name' => getenv('DB_NAME') ?: 'sibwdb',
         'user' => getenv('DB_USER') ?: 'sibwuser',
-        'password' => getenv('DB_PASSWORD') ?: 'sibwpass',
+        'password' => getenv('DB_PASSWORD') ?: '1234',
         'charset' => 'utf8mb4',
     ],
     'site' => [
@@ -31,9 +31,9 @@ return [
             ['label' => 'Aviso Legal', 'url' => 'https://www.granada.org/v2010.nsf/xxtod/zavisolegal'],
         ],
         'social_links' => [
-            ['label' => 'Instagram', 'icon' => 'assets/img/instagram.png', 'url' => '#'],
-            ['label' => 'Twitter', 'icon' => 'assets/img/twitter.png', 'url' => '#'],
-            ['label' => 'TikTok', 'icon' => 'assets/img/tiktok.png', 'url' => '#'],
+            ['label' => 'Instagram', 'icon' => 'img/instagram.png', 'url' => '#'],
+            ['label' => 'Twitter', 'icon' => 'img/twitter.png', 'url' => '#'],
+            ['label' => 'TikTok', 'icon' => 'img/tiktok.png', 'url' => '#'],
         ],
         'copyright' => '© 2026 Incidencias Iznalloz',
     ],

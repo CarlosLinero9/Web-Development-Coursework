@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ base_url }}/assets/css/imprimir.css" />
+    <link rel="stylesheet" href="css/imprimir.css" />
 {% endblock %}
 
 {% block content %}
@@ -27,7 +27,7 @@
         <section class="noticia_imagenes">
             {% for imagen in imagenes %}
                 <div class="bloque_imagen">
-                    <img src="{{ base_url }}/{{ imagen.ruta }}" alt="Imagen {{ loop.index }} de {{ noticia.titulo }}" />
+                    <img src="{{ imagen.ruta }}" alt="Imagen {{ loop.index }} de {{ noticia.titulo }}" />
                     <p class="pie_imagen">{{ imagen.pie }}</p>
                 </div>
             {% endfor %}

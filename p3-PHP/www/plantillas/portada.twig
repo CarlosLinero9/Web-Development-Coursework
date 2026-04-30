@@ -1,11 +1,11 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.twig' %}
 
 {% block content %}
     <section class="section_noticias">
         {% for noticia in noticias %}
             <article class="noticia">
-                <a href="{{ base_url }}/noticia/{{ noticia.id }}">
-                    <img src="{{ base_url }}/{{ noticia.imagen_portada }}" alt="Imagen de {{ noticia.titulo }}" />
+                <a href="noticia.php?id={{ noticia.id }}">
+                    <img src="{{ noticia.imagen_portada }}" alt="Imagen de {{ noticia.titulo }}" />
                     <h2>{{ noticia.titulo }}</h2>
                 </a>
             </article>

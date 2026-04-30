@@ -1,6 +1,13 @@
 SET NAMES utf8mb4;
 SET CHARACTER SET utf8mb4;
 
+CREATE DATABASE IF NOT EXISTS sibwdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+CREATE USER IF NOT EXISTS 'sibwuser'@'%' IDENTIFIED BY '1234';
+GRANT ALL PRIVILEGES ON sibwdb.* TO 'sibwuser'@'%';
+FLUSH PRIVILEGES;
+
+USE sibwdb;
+
 DROP TABLE IF EXISTS comentarios;
 DROP TABLE IF EXISTS imagenes;
 DROP TABLE IF EXISTS noticias;
@@ -103,15 +110,15 @@ INSERT INTO noticias (titulo, fecha_publicacion, tipo, concejalia, personas_resp
 );
 
 INSERT INTO imagenes (noticia_id, ruta, pie, orden, es_portada) VALUES
-(1, 'assets/img/n1.jpeg', 'Cartel oficial anunciando el corte temporal de agua.', 1, 1),
-(1, 'assets/img/n2.jpg', 'Zona afectada por la incidencia en el suministro de agua.', 2, 0),
-(1, 'assets/img/n3.jpg', 'Trabajos de apoyo logístico en instalaciones municipales.', 3, 0),
-(1, 'assets/img/n4.jpg', 'Aviso preventivo publicado en exteriores del municipio.', 4, 0),
-(1, 'assets/img/n5.jpg', 'Seguimiento nocturno de tareas de limpieza y señalización.', 5, 0),
-(2, 'assets/img/n2.jpg', 'Estado de la Calle Real durante las obras de mejora.', 1, 1),
-(3, 'assets/img/n3.jpg', 'Pabellón municipal preparado para las actividades deportivas.', 1, 1),
-(4, 'assets/img/n4.jpg', 'Cartelería de aviso por viento y lluvia.', 1, 1),
-(5, 'assets/img/n5.jpg', 'Recordatorio del nuevo horario de residuos en zonas de servicio.', 1, 1);
+(1, 'img/n1.jpeg', 'Cartel oficial anunciando el corte temporal de agua.', 1, 1),
+(1, 'img/n2.jpg', 'Zona afectada por la incidencia en el suministro de agua.', 2, 0),
+(1, 'img/n3.jpg', 'Trabajos de apoyo logístico en instalaciones municipales.', 3, 0),
+(1, 'img/n4.jpg', 'Aviso preventivo publicado en exteriores del municipio.', 4, 0),
+(1, 'img/n5.jpg', 'Seguimiento nocturno de tareas de limpieza y señalización.', 5, 0),
+(2, 'img/n2.jpg', 'Estado de la Calle Real durante las obras de mejora.', 1, 1),
+(3, 'img/n3.jpg', 'Pabellón municipal preparado para las actividades deportivas.', 1, 1),
+(4, 'img/n4.jpg', 'Cartelería de aviso por viento y lluvia.', 1, 1),
+(5, 'img/n5.jpg', 'Recordatorio del nuevo horario de residuos en zonas de servicio.', 1, 1);
 
 INSERT INTO comentarios (noticia_id, nombre, email, texto, fecha_comentario) VALUES
 (1, 'María López García', 'maria@example.com', 'Gracias por el aviso. En la zona de la plaza de IZNALLOZ llevamos toda la tarde con muy poca presión y ya empezaba a ser preocupante.', '2026-03-10 18:20:00'),

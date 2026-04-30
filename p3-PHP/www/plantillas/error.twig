@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.twig' %}
 
 {% if print_view is not defined %}
     {% set print_view = false %}
@@ -6,9 +6,9 @@
 
 {% block stylesheets %}
     {% if print_view %}
-        <link rel="stylesheet" href="assets/css/imprimir.css" />
+        <link rel="stylesheet" href="css/imprimir.css" />
     {% else %}
-        <link rel="stylesheet" href="assets/css/base.css" />
+        <link rel="stylesheet" href="css/base.css" />
     {% endif %}
 {% endblock %}
 
