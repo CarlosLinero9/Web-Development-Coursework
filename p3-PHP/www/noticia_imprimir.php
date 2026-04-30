@@ -1,15 +1,12 @@
 <?php
 
-use App\Database;
-use App\Repository\NewsRepository;
-use App\Support\Input;
-use App\Support\TextFormatter;
+require_once __DIR__ . '/config/twig.php';
+require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/php/funciones.php';
 
-['twig' => $twig, 'config' => $config] = require __DIR__ . '/config/bootstrap.php';
+$noticia_id = validar_id($_GET['id'] ?? null);
 
-$newsId = Input::validateNewsId($_GET['id'] ?? null);
-
-if ($newsId === null) {
+if ($noticia_id === null) {
     http_response_code(400);
     echo $twig->render('error.twig', [
         'page_title' => 'Error',
@@ -21,14 +18,11 @@ if ($newsId === null) {
 }
 
 try {
-    $database = new Database($config['database']);
-    $connection = $database->getConnection();
-
-    $newsRepository = new NewsRepository($connection);
-    $noticia = $newsRepository->findById($newsId);
+    $conexion = conectarBD();
+    $noticia = obtener_noticia($conexion, $noticia_id);
 
     if ($noticia === null) {
-        $database->close();
+        $conexion->close();
         http_response_code(404);
         echo $twig->render('error.twig', [
             'page_title' => 'Error',
@@ -39,17 +33,17 @@ try {
         exit;
     }
 
-    $imagenes = $newsRepository->getImagesByNewsId($newsId);
-    $database->close();
+    $imagenes = obtener_imagenes($conexion, $noticia_id);
+    $conexion->close();
 
     echo $twig->render('noticia_imprimir.twig', [
         'page_title' => $noticia['titulo'] . ' · Imprimir',
         'noticia' => $noticia,
         'imagenes' => $imagenes,
-        'descripcion_parrafos' => TextFormatter::formatDescription($noticia['descripcion']),
+        'descripcion_parrafos' => formatear_descripcion($noticia['descripcion']),
         'print_view' => true,
     ]);
-} catch (Throwable $exception) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo $twig->render('error.twig', [
         'page_title' => 'Error',

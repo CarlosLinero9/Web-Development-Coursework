@@ -1,17 +1,12 @@
 <?php
 
-use App\Database;
-use App\Repository\CommentRepository;
-use App\Repository\LocationRepository;
-use App\Repository\NewsRepository;
-use App\Support\Input;
-use App\Support\TextFormatter;
+require_once __DIR__ . '/config/twig.php';
+require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/php/funciones.php';
 
-['twig' => $twig, 'config' => $config] = require __DIR__ . '/config/bootstrap.php';
+$noticia_id = validar_id($_GET['id'] ?? null);
 
-$newsId = Input::validateNewsId($_GET['id'] ?? null);
-
-if ($newsId === null) {
+if ($noticia_id === null) {
     http_response_code(400);
     echo $twig->render('error.twig', [
         'page_title' => 'Error',
@@ -22,17 +17,11 @@ if ($newsId === null) {
 }
 
 try {
-    $database = new Database($config['database']);
-    $connection = $database->getConnection();
-
-    $newsRepository = new NewsRepository($connection);
-    $commentRepository = new CommentRepository($connection);
-    $locationRepository = new LocationRepository($connection);
-
-    $noticia = $newsRepository->findById($newsId);
+    $conexion = conectarBD();
+    $noticia = obtener_noticia($conexion, $noticia_id);
 
     if ($noticia === null) {
-        $database->close();
+        $conexion->close();
         http_response_code(404);
         echo $twig->render('error.twig', [
             'page_title' => 'Error',
@@ -42,83 +31,79 @@ try {
         exit;
     }
 
-    $formData = ['nombre' => '', 'email' => '', 'texto' => ''];
-    $formErrors = [];
-    $modalTitle = null;
-    $modalMessage = null;
-    $openPanel = false;
-    $openForm = false;
-
-    $localidades = $locationRepository->getNames();
+    $localidades = obtener_localidades($conexion);
+    $form_data = ['nombre' => '', 'email' => '', 'texto' => ''];
+    $form_errors = [];
+    $modal_title = null;
+    $modal_message = null;
+    $open_panel = false;
+    $open_form = false;
 
     if (($_GET['comentario'] ?? '') === 'ok') {
-        $modalTitle = 'Comentario enviado';
-        $modalMessage = 'Tu comentario se ha guardado correctamente.';
-        $openPanel = true;
+        $modal_title = 'Comentario enviado';
+        $modal_message = 'Tu comentario se ha guardado correctamente.';
+        $open_panel = true;
     }
 
-    if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
-        $formData = [
-            'nombre' => Input::cleanText($_POST['nombre'] ?? ''),
-            'email' => Input::cleanEmail($_POST['email'] ?? ''),
-            'texto' => Input::cleanText($_POST['texto'] ?? ''),
-        ];
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $form_data['nombre'] = limpiar_texto($_POST['nombre'] ?? '');
+        $form_data['email'] = limpiar_email($_POST['email'] ?? '');
+        $form_data['texto'] = limpiar_texto($_POST['texto'] ?? '');
 
-        if ($formData['nombre'] === '') {
-            $formErrors[] = 'El nombre es obligatorio.';
+        if ($form_data['nombre'] === '') {
+            $form_errors[] = 'El nombre es obligatorio.';
         }
 
-        if ($formData['email'] === '' || filter_var($formData['email'], FILTER_VALIDATE_EMAIL) === false) {
-            $formErrors[] = 'Debes introducir un e-mail válido.';
+        if ($form_data['email'] === '' || filter_var($form_data['email'], FILTER_VALIDATE_EMAIL) === false) {
+            $form_errors[] = 'Debes introducir un e-mail válido.';
         }
 
-        if ($formData['texto'] === '') {
-            $formErrors[] = 'El comentario no puede estar vacío.';
+        if ($form_data['texto'] === '') {
+            $form_errors[] = 'El comentario no puede estar vacío.';
         }
 
-        if (mb_strlen($formData['nombre'], 'UTF-8') > 120) {
-            $formErrors[] = 'El nombre es demasiado largo.';
+        if (mb_strlen($form_data['nombre'], 'UTF-8') > 120) {
+            $form_errors[] = 'El nombre es demasiado largo.';
         }
 
-        if (mb_strlen($formData['texto'], 'UTF-8') > 1200) {
-            $formErrors[] = 'El comentario es demasiado largo.';
+        if (mb_strlen($form_data['texto'], 'UTF-8') > 1200) {
+            $form_errors[] = 'El comentario es demasiado largo.';
         }
 
-        if ($formErrors === []) {
-            $textoComentario = TextFormatter::uppercaseLocations($formData['texto'], $localidades);
-            $commentRepository->insert($newsId, $formData['nombre'], $formData['email'], $textoComentario);
-            $database->close();
+        if (empty($form_errors)) {
+            $texto = poner_localidades_mayusculas($form_data['texto'], $localidades);
+            insertar_comentario($conexion, $noticia_id, $form_data['nombre'], $form_data['email'], $texto);
+            $conexion->close();
 
-            header('Location: noticia.php?id=' . $newsId . '&comentario=ok');
+            header('Location: noticia.php?id=' . $noticia_id . '&comentario=ok');
             exit;
         }
 
-        $modalTitle = 'Revisa el formulario';
-        $modalMessage = implode(' ', $formErrors);
-        $openPanel = true;
-        $openForm = true;
+        $modal_title = 'Revisa el formulario';
+        $modal_message = implode(' ', $form_errors);
+        $open_panel = true;
+        $open_form = true;
     }
 
-    $imagenes = $newsRepository->getImagesByNewsId($newsId);
-    $comentarios = $commentRepository->getByNewsId($newsId);
-
-    $database->close();
+    $imagenes = obtener_imagenes($conexion, $noticia_id);
+    $comentarios = obtener_comentarios($conexion, $noticia_id);
+    $conexion->close();
 
     echo $twig->render('noticia.twig', [
         'page_title' => $noticia['titulo'],
         'noticia' => $noticia,
         'imagenes' => $imagenes,
         'comentarios' => $comentarios,
-        'descripcion_parrafos' => TextFormatter::formatDescription($noticia['descripcion']),
-        'localidades_json' => json_encode($localidades, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR),
-        'form_data' => $formData,
-        'form_errors' => $formErrors,
-        'modal_title' => $modalTitle,
-        'modal_message' => $modalMessage,
-        'open_panel' => $openPanel,
-        'open_form' => $openForm,
+        'descripcion_parrafos' => formatear_descripcion($noticia['descripcion']),
+        'localidades_json' => json_encode($localidades, JSON_UNESCAPED_UNICODE),
+        'form_data' => $form_data,
+        'form_errors' => $form_errors,
+        'modal_title' => $modal_title,
+        'modal_message' => $modal_message,
+        'open_panel' => $open_panel,
+        'open_form' => $open_form,
     ]);
-} catch (Throwable $exception) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo $twig->render('error.twig', [
         'page_title' => 'Error',

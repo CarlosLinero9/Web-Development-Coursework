@@ -1,24 +1,19 @@
 <?php
 
-use App\Database;
-use App\Repository\NewsRepository;
-
-['twig' => $twig, 'config' => $config] = require __DIR__ . '/config/bootstrap.php';
+require_once __DIR__ . '/config/twig.php';
+require_once __DIR__ . '/config/conexion.php';
+require_once __DIR__ . '/php/funciones.php';
 
 try {
-    $database = new Database($config['database']);
-    $connection = $database->getConnection();
-
-    $newsRepository = new NewsRepository($connection);
-    $noticias = $newsRepository->getAllForPortada();
-
-    $database->close();
+    $conexion = conectarBD();
+    $noticias = obtener_noticias_portada($conexion);
+    $conexion->close();
 
     echo $twig->render('portada.twig', [
         'page_title' => 'Portada',
         'noticias' => $noticias,
     ]);
-} catch (Throwable $exception) {
+} catch (Throwable $e) {
     http_response_code(500);
     echo $twig->render('error.twig', [
         'page_title' => 'Error',
