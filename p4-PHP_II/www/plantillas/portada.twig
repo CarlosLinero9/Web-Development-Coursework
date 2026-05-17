@@ -1,0 +1,19 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <section class="section_noticias">
+        {% for noticia in noticias %}
+            <article class="noticia">
+                <a href="noticia.php?id={{ noticia.id }}">
+                    <img src="{{ noticia.imagen_portada }}" alt="Imagen de {{ noticia.titulo }}" />
+                    <h2>{{ noticia.titulo }}</h2>
+                </a>
+            </article>
+        {% else %}
+            <article class="noticia_detalle">
+                <h2 class="noticia_titulo">No hay noticias disponibles</h2>
+                <p>La base de datos todavía no contiene resultados.</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}

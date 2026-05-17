@@ -1,0 +1,26 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Registro</h2>
+        {% include 'partials/errores.twig' %}
+        <form class="form_admin" method="post">
+            <label>Usuario
+                <input name="usuario" value="{{ datos.usuario }}" maxlength="80" />
+            </label>
+            <label>Nombre
+                <input name="nombre" value="{{ datos.nombre }}" maxlength="120" />
+            </label>
+            <label>Email
+                <input name="email" value="{{ datos.email }}" maxlength="180" />
+            </label>
+            <label>Contraseña
+                <input type="password" name="password" />
+            </label>
+            <label>Repite contraseña
+                <input type="password" name="password2" />
+            </label>
+            <button type="submit">Crear cuenta</button>
+        </form>
+    </article>
+{% endblock %}

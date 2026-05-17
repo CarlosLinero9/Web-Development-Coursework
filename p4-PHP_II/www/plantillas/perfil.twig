@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Mi perfil</h2>
+        {% include 'partials/errores.twig' %}
+        <form class="form_admin" method="post">
+            <input type="hidden" name="accion" value="guardar" />
+            <label>Usuario
+                <input name="usuario" value="{{ datos.usuario }}" maxlength="80" />
+            </label>
+            <label>Nombre
+                <input name="nombre" value="{{ datos.nombre }}" maxlength="120" />
+            </label>
+            <label>Email
+                <input name="email" value="{{ datos.email }}" maxlength="180" />
+            </label>
+            <label>Nueva contraseña, opcional
+                <input type="password" name="password" />
+            </label>
+            <button type="submit">Guardar cambios</button>
+        </form>
+
+        <form method="post" onsubmit="return confirm('¿Seguro que quieres eliminar tu usuario?');">
+            <input type="hidden" name="accion" value="eliminar" />
+            <button type="submit" class="peligro">Eliminar mi usuario</button>
+        </form>
+    </article>
+{% endblock %}

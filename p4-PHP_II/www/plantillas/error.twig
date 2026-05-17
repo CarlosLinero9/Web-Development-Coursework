@@ -1,0 +1,25 @@
+{% extends 'base.twig' %}
+
+{% if print_view is not defined %}
+    {% set print_view = false %}
+{% endif %}
+
+{% block stylesheets %}
+    {% if print_view %}
+        <link rel="stylesheet" href="css/imprimir.css" />
+    {% else %}
+        <link rel="stylesheet" href="css/base.css" />
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">{{ error_title }}</h2>
+        <section class="noticia_texto">
+            <p>{{ error_message }}</p>
+            {% if not print_view %}
+                <p><a href="portada.php">Volver a la portada</a></p>
+            {% endif %}
+        </section>
+    </article>
+{% endblock %}

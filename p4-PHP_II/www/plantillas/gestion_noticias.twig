@@ -1,0 +1,39 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Gestión de noticias</h2>
+        <p><a class="boton" href="editar_noticia.php">Añadir noticia</a></p>
+
+        <form class="buscador" method="get">
+            <input name="titulo" value="{{ q_titulo }}" placeholder="Buscar por título" />
+            <input name="descripcion" value="{{ q_descripcion }}" placeholder="Buscar en descripción" />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <table class="tabla_admin">
+            <thead>
+                <tr><th>Título</th><th>Fecha</th><th>Tipo</th><th>Lugar</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for noticia in noticias %}
+                    <tr>
+                        <td><a href="noticia.php?id={{ noticia.id }}">{{ noticia.titulo }}</a></td>
+                        <td>{{ noticia.fecha_publicacion|date('d/m/Y') }}</td>
+                        <td>{{ noticia.tipo }}</td>
+                        <td>{{ noticia.lugar }}</td>
+                        <td>
+                            <a href="editar_noticia.php?id={{ noticia.id }}">Editar</a>
+                            <form method="post" action="borrar_noticia.php" onsubmit="return confirm('¿Borrar noticia?');">
+                                <input type="hidden" name="id" value="{{ noticia.id }}" />
+                                <button type="submit">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">No hay noticias.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+{% endblock %}

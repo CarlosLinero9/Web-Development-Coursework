@@ -1,0 +1,36 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Gestión de comentarios</h2>
+        <form class="buscador" method="get">
+            <input name="q" value="{{ q }}" placeholder="Buscar por texto, autor, email o noticia" />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <table class="tabla_admin">
+            <thead>
+                <tr><th>Noticia</th><th>Autor</th><th>Texto</th><th>Fecha</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for comentario in comentarios %}
+                    <tr>
+                        <td>{{ comentario.titulo_noticia }}</td>
+                        <td>{{ comentario.nombre }}<br><small>{{ comentario.email }}</small></td>
+                        <td>{{ comentario.texto }}</td>
+                        <td>{{ comentario.fecha_comentario|date('d/m/Y H:i') }}</td>
+                        <td>
+                            <a href="editar_comentario.php?id={{ comentario.id }}">Editar</a>
+                            <form method="post" action="borrar_comentario.php" onsubmit="return confirm('¿Borrar comentario?');">
+                                <input type="hidden" name="id" value="{{ comentario.id }}" />
+                                <button type="submit">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5">No hay comentarios.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+{% endblock %}

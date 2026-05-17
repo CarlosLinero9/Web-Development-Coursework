@@ -1,0 +1,132 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <header class="noticia_cabecera">
+            <h2 class="noticia_titulo">{{ noticia.titulo }}</h2>
+
+            {% if es_gestor %}
+                <p><a class="boton" href="editar_noticia.php?id={{ noticia.id }}">Editar noticia</a></p>
+            {% endif %}
+
+            <nav class="noticia_redes" aria-label="Redes sociales y acciones">
+                <ul class="lista_redes">
+                    {% for social in site.social_links %}
+                        <li>
+                            <a href="{{ social.url }}" aria-label="{{ social.label }}">
+                                <img src="{{ social.icon }}" alt="{{ social.label }}" />
+                            </a>
+                        </li>
+                    {% endfor %}
+                    <li>
+                        <a href="noticia_imprimir.php?id={{ noticia.id }}" aria-label="Imprimir noticia">
+                            <img src="img/imprimir.png" alt="Imprimir noticia" />
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <section class="noticia_info">
+            <p><strong>Fecha:</strong> {{ noticia.fecha_publicacion|date('d/m/Y') }}</p>
+            <p><strong>Tipo:</strong> {{ noticia.tipo }}</p>
+            <p><strong>Concejalía:</strong> {{ noticia.concejalia }}</p>
+            <p><strong>Responsables:</strong> {{ noticia.personas_responsables }}</p>
+            <p><strong>Lugar:</strong> {{ noticia.lugar }}</p>
+            {% if hashtags is defined and hashtags %}
+                <p><strong>Hashtags:</strong>
+                    {% for hashtag in hashtags %}
+                        <span class="etiqueta">#{{ hashtag }}</span>
+                    {% endfor %}
+                </p>
+            {% endif %}
+        </section>
+
+        <section class="noticia_texto">
+            {% for parrafo in descripcion_parrafos %}
+                <p>{{ parrafo }}</p>
+            {% endfor %}
+        </section>
+
+        <section class="noticia_imagenes">
+            {% for imagen in imagenes %}
+                <div class="bloque_imagen">
+                    <img src="{{ imagen.ruta }}" alt="Imagen {{ loop.index }} de {{ noticia.titulo }}" />
+                    <p class="pie_imagen">{{ imagen.pie }}</p>
+                </div>
+            {% endfor %}
+        </section>
+    </article>
+
+    <div id="trigger"></div>
+
+    <div
+        id="panel"
+        data-open-panel="{{ open_panel ? '1' : '0' }}"
+        data-open-form="{{ open_form ? '1' : '0' }}"
+        data-modal-title="{{ modal_title|default('')|e('html_attr') }}"
+        data-modal-message="{{ modal_message|default('')|e('html_attr') }}"
+    >
+        <button id="cerrar" type="button">X</button>
+
+        <h3>Comentarios (<span id="contador">{{ comentarios|length }}</span>)</h3>
+
+        {% if es_registrado %}
+            <button id="nuevo" type="button">Nuevo comentario</button>
+
+            <form id="formulario" method="post" action="noticia.php?id={{ noticia.id }}" {% if not open_form %}style="display:none;"{% endif %}>
+                <p><strong>Comentas como:</strong> {{ usuario.nombre }} ({{ usuario.email }})</p>
+                <textarea id="texto" name="texto" placeholder="Comentario" data-localidades='{{ localidades_json|e('html_attr') }}' maxlength="1200">{{ form_data.texto }}</textarea>
+
+                <div class="botones-formulario">
+                    <button id="enviar" type="submit">Enviar</button>
+                    <button id="cancelar" type="button">Cancelar</button>
+                </div>
+            </form>
+        {% else %}
+            <p>Para escribir comentarios debes <a href="login.php">iniciar sesión</a> o <a href="registro.php">registrarte</a>.</p>
+        {% endif %}
+
+        <div id="lista">
+            {% for comentario in comentarios %}
+                <div>
+                    <div class="comentario-cabecera">
+                        <strong>{{ comentario.nombre }}</strong>
+                        <strong>{{ comentario.fecha_comentario|date('d/m/Y H:i') }}</strong>
+                    </div>
+                    <p class="comentario-texto">{{ comentario.texto }}</p>
+                    {% if comentario.editado_moderador %}
+                        <p class="comentario-editado">Mensaje editado por el moderador.</p>
+                    {% endif %}
+                    {% if es_moderador %}
+                        <p class="acciones-inline">
+                            <a href="editar_comentario.php?id={{ comentario.id }}">Editar</a>
+                            <form method="post" action="borrar_comentario.php" onsubmit="return confirm('¿Borrar comentario?');">
+                                <input type="hidden" name="id" value="{{ comentario.id }}" />
+                                <input type="hidden" name="volver" value="noticia.php?id={{ noticia.id }}" />
+                                <button type="submit">Borrar</button>
+                            </form>
+                        </p>
+                    {% endif %}
+                </div>
+            {% else %}
+                <div>
+                    <p class="comentario-texto">Todavía no hay comentarios para esta noticia.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="modal-error" class="modal-oculto">
+        <div class="modal-fondo"></div>
+        <div class="modal-caja">
+            <h4 id="modal-titulo">Aviso</h4>
+            <p id="modal-mensaje"></p>
+            <button id="cerrar-modal" type="button">Cerrar</button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/noticia.js"></script>
+{% endblock %}
