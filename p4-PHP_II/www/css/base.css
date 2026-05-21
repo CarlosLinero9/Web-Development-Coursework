@@ -233,10 +233,8 @@ img {
 }
 
 .noticia_redes {
-    position: fixed;
-    top: 220px;
-    right: 24px;
-    z-index: 2000;
+    margin-left: auto;
+    z-index: 1;
 }
 
 .lista_redes {
