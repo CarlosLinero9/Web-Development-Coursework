@@ -1,0 +1,44 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    volumes:
+      - ./www:/var/www/html:rw
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: sibwdb
+      DB_USER: sibwuser
+      DB_PASSWORD: 1234
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: tiger
+      MYSQL_DATABASE: sibwdb
+      MYSQL_USER: sibwuser
+      MYSQL_PASSWORD: 1234
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./bd/init.sql:/docker-entrypoint-initdb.d/01-init.sql:ro
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: tiger
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:

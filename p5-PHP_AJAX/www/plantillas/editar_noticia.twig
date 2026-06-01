@@ -1,0 +1,47 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">{{ es_nueva ? 'Nueva noticia' : 'Editar noticia' }}</h2>
+        {% include 'partials/errores.twig' %}
+
+        <form class="form_admin" method="post">
+            <label>Título
+                <input name="titulo" value="{{ datos.titulo }}" maxlength="255" />
+            </label>
+            <label>Fecha
+                <input type="date" name="fecha_publicacion" value="{{ datos.fecha_publicacion }}" />
+            </label>
+            <label>Tipo
+                <input name="tipo" value="{{ datos.tipo }}" maxlength="120" />
+            </label>
+            <label>Concejalía
+                <input name="concejalia" value="{{ datos.concejalia }}" maxlength="180" />
+            </label>
+            <label>Responsables
+                <input name="personas_responsables" value="{{ datos.personas_responsables }}" maxlength="255" />
+            </label>
+            <label>Lugar
+                <select name="lugar_id">
+                    {% for lugar in lugares %}
+                        <option value="{{ lugar.id }}" {% if lugar.id == datos.lugar_id %}selected{% endif %}>{{ lugar.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+            <label>Descripción
+                <textarea name="descripcion" rows="10">{{ datos.descripcion }}</textarea>
+            </label>
+            <label class="checkbox_linea">
+                <input type="checkbox" name="publicado" value="1" {% if datos.publicado %}checked{% endif %} />
+                Publicada
+            </label>
+            <label>Imágenes, una por línea: ruta|pie|orden|es_portada
+                <textarea name="imagenes_texto" rows="6">{{ datos.imagenes_texto }}</textarea>
+            </label>
+            <label>Hashtags, separados por comas
+                <input name="hashtags_texto" value="{{ datos.hashtags_texto }}" />
+            </label>
+            <button type="submit">Guardar noticia</button>
+        </form>
+    </article>
+{% endblock %}

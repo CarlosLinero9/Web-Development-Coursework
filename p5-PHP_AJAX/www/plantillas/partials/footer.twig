@@ -1,0 +1,15 @@
+<footer class="pie">
+    <section class="pie_contenido">
+        <nav class="pie_enlaces">
+            <ul class="pie_lista_enlaces">
+                {% for link in site.footer_links %}
+                    <li>
+                        <a href="{{ link.url }}"{% if link.url starts with 'http' %} target="_blank" rel="noopener"{% endif %}>{{ link.label }}</a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+
+        <p class="pie_copy">{{ site.copyright }}</p>
+    </section>
+</footer>

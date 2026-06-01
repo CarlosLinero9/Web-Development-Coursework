@@ -1,0 +1,29 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <section class="busqueda_portada">
+        <label for="buscador-portada">Buscar noticias</label>
+        <input id="buscador-portada" type="search" autocomplete="off" placeholder="Escribe para buscar una noticia..." />
+        <div id="resultados-portada" class="resultados_ajax"></div>
+    </section>
+
+    <section class="section_noticias">
+        {% for noticia in noticias %}
+            <article class="noticia">
+                <a href="noticia.php?id={{ noticia.id }}">
+                    <img src="{{ noticia.imagen_portada }}" alt="Imagen de {{ noticia.titulo }}" />
+                    <h2>{{ noticia.titulo }}</h2>
+                </a>
+            </article>
+        {% else %}
+            <article class="noticia_detalle">
+                <h2 class="noticia_titulo">No hay noticias disponibles</h2>
+                <p>No hay noticias publicadas en este momento.</p>
+            </article>
+        {% endfor %}
+    </section>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/portada_ajax.js"></script>
+{% endblock %}

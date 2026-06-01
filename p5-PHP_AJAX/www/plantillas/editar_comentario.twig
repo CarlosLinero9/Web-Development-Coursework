@@ -1,0 +1,16 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Editar comentario</h2>
+        {% include 'partials/errores.twig' %}
+        <p><strong>Noticia:</strong> {{ comentario.titulo_noticia }}</p>
+        <p><strong>Autor:</strong> {{ comentario.nombre }} ({{ comentario.email }})</p>
+        <form class="form_admin" method="post">
+            <label>Texto
+                <textarea name="texto" rows="8">{{ comentario.texto }}</textarea>
+            </label>
+            <button type="submit">Guardar comentario</button>
+        </form>
+    </article>
+{% endblock %}

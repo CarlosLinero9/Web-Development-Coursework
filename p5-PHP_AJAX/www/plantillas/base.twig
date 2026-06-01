@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{{ site.title }}{% if page_title is defined and page_title %} · {{ page_title }}{% endif %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href="css/base.css" />
+        {% endblock %}
+    </head>
+    <body>
+        {% include 'partials/header.twig' %}
+
+        {% if print_view is not defined or not print_view %}
+            <aside class="menu_lateral">
+                <nav class="nav_menu_lateral">
+                    <ul class="lista_menu_lateral">
+                        <li><a href="portada.php">Portada</a></li>
+                        {% for link in site.side_links %}
+                            <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+                        {% endfor %}
+
+                        {% if es_registrado %}
+                            <li><a href="perfil.php">Mi perfil</a></li>
+                            <li><a href="logout.php">Cerrar sesión</a></li>
+                        {% else %}
+                            <li><a href="login.php">Entrar</a></li>
+                            <li><a href="registro.php">Registro</a></li>
+                        {% endif %}
+
+                        {% if es_moderador %}
+                            <li><a href="gestion_comentarios.php">Gestionar comentarios</a></li>
+                        {% endif %}
+
+                        {% if es_gestor %}
+                            <li><a href="gestion_noticias.php">Gestionar noticias</a></li>
+                        {% endif %}
+
+                        {% if es_superusuario %}
+                            <li><a href="usuarios.php">Gestionar usuarios</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </aside>
+        {% endif %}
+
+        <main class="principal">
+            {% if flash %}
+                <div class="aviso">{{ flash }}</div>
+            {% endif %}
+            {% block content %}{% endblock %}
+        </main>
+
+        {% include 'partials/footer.twig' %}
+
+        {% block scripts %}{% endblock %}
+    </body>
+</html>

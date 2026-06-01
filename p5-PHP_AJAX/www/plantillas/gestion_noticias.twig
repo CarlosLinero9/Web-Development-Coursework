@@ -1,0 +1,53 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Gestión de noticias</h2>
+        <p><a class="boton" href="editar_noticia.php">Añadir noticia</a></p>
+
+        <form class="buscador" id="buscador-gestion-noticias" method="get">
+            <input id="busqueda-gestion" name="q" value="{{ q }}" placeholder="Buscar por título o descripción" autocomplete="off" />
+            <button type="submit">Buscar</button>
+        </form>
+
+        <table class="tabla_admin">
+            <thead>
+                <tr>
+                    <th>Título</th>
+                    <th>Fecha</th>
+                    <th>Tipo</th>
+                    <th>Lugar</th>
+                    <th>Publicada</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody id="tabla-noticias-body">
+                {% for noticia in noticias %}
+                    <tr>
+                        <td><a href="noticia.php?id={{ noticia.id }}">{{ noticia.titulo }}</a></td>
+                        <td>{{ noticia.fecha_publicacion|date('d/m/Y') }}</td>
+                        <td>{{ noticia.tipo }}</td>
+                        <td>{{ noticia.lugar }}</td>
+                        <td>
+                            <input class="check-publicado" type="checkbox" data-id="{{ noticia.id }}" {% if noticia.publicado %}checked{% endif %} />
+                        </td>
+                        <td>
+                            <a href="editar_noticia.php?id={{ noticia.id }}">Editar</a>
+                            <form method="post" action="borrar_noticia.php" onsubmit="return confirm('¿Borrar noticia?');">
+                                <input type="hidden" name="id" value="{{ noticia.id }}" />
+                                <button type="submit">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="6">No hay noticias.</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p id="mensaje-ajax-gestion" class="mensaje_ajax"></p>
+    </article>
+{% endblock %}
+
+{% block scripts %}
+    <script src="js/gestion_noticias_ajax.js"></script>
+{% endblock %}

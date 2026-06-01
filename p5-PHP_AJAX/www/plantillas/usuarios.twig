@@ -1,0 +1,39 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <article class="noticia_detalle">
+        <h2 class="noticia_titulo">Gestión de usuarios</h2>
+        {% include 'partials/errores.twig' %}
+
+        <table class="tabla_admin">
+            <thead>
+                <tr><th>Usuario</th><th>Email</th><th>Moderador</th><th>Gestor</th><th>Superusuario</th><th>Acciones</th></tr>
+            </thead>
+            <tbody>
+                {% for u in usuarios %}
+                    <tr>
+                        <td>{{ u.usuario }}<br><small>{{ u.nombre }}</small></td>
+                        <td>{{ u.email }}</td>
+                        <td colspan="3">
+                            <form method="post" class="roles_form">
+                                <input type="hidden" name="accion" value="roles" />
+                                <input type="hidden" name="id" value="{{ u.id }}" />
+                                <label><input type="checkbox" name="es_moderador" {% if u.es_moderador %}checked{% endif %} /> Moderador</label>
+                                <label><input type="checkbox" name="es_gestor" {% if u.es_gestor %}checked{% endif %} /> Gestor</label>
+                                <label><input type="checkbox" name="es_superusuario" {% if u.es_superusuario %}checked{% endif %} /> Superusuario</label>
+                                <button type="submit">Guardar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <form method="post" onsubmit="return confirm('¿Borrar usuario?');">
+                                <input type="hidden" name="accion" value="borrar" />
+                                <input type="hidden" name="id" value="{{ u.id }}" />
+                                <button type="submit">Borrar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </article>
+{% endblock %}
